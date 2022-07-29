@@ -1,0 +1,28 @@
+.App{
+    background-color: #eee;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+}
+.container{
+    background-color: #fff;
+    width: 50vw;
+    max-width: 400px;
+    height: 80vh;
+    margin: auto;
+    border:1px solid #ddd ;
+    border-radius: 5px;
+    padding: 16px;
+
+}
+.container > .line{
+    margin : 16px 0px;
+}
+.container> h1 {
+    color: blueviolet;
+}
+.list-item{
+    padding: 16px;
+    margin: 8px;
+    background-color: palevioletred;
+}
