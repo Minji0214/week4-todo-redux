@@ -1,8 +1,8 @@
 import React from "react";
-import { Fragment, useEffect, useState } from "react";
+import { Fragment } from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux"; //dispatch 임포트
-import { ruDone, deleteList } from "../redux/config/configStore";
+import { deleteHandler, doneHandler } from '../redux/modules/todo';
 import { useNavigate } from "react-router-dom";
 
 const List = () => {
@@ -10,6 +10,8 @@ const List = () => {
   let todoList = useSelector((state) => {
     return state.todoList;
   });
+  //todo 필터 두개 안쓰는 방법 
+  //todo 컴포넌트 분리 할수 있는 방법 고민 
   let test1 = todoList.filter((y) => {
     return y.isDone === false;
   });
@@ -19,35 +21,38 @@ const List = () => {
 
   const navigate = useNavigate();
 
-
   return (
     <>
       <Container>
         <Title>working</Title>
         <hr />
         <ListBox>
-      
           {test1.map((x, i) => {
             return (
               <Fragment key={x.id}>
                 <CardBox>
-                <DetailBtn onClick={()=>{
-                  const id = x.id
-                  navigate(`/detail/${id}`)}}>상세보기</DetailBtn>
+                  <DetailBtn
+                    onClick={() => {
+                      const id = x.id;
+                      navigate(`/detail/${id}`);
+                    }}
+                  >
+                    상세보기
+                  </DetailBtn>
 
                   <div>
                     <h3>{x.title}</h3>
                     <p>{x.body}</p>
                   </div>
                   <div>
-                  <Btn
+                    <Btn
                       className="btn"
                       onClick={() => {
                         let 인덱스 = todoList.findIndex(
                           (element) => element.id === x.id
                         );
-                        
-                        dispatch(deleteList(인덱스));
+
+                        dispatch(deleteHandler(인덱스));
                       }}
                     >
                       삭제
@@ -59,7 +64,7 @@ const List = () => {
                           (element) => element.id === x.id
                         );
                         인덱스 = todoList[인덱스].id;
-                        dispatch(ruDone(인덱스));
+                        dispatch(doneHandler(인덱스));
                       }}
                     >
                       {" "}
@@ -70,33 +75,36 @@ const List = () => {
               </Fragment>
             );
           })}
-
         </ListBox>
 
         <Title>done</Title>
         <hr />
         <ListBox>
-
           {test2.map((x, i) => {
             return (
               <Fragment key={x.id}>
                 <CardBox>
-                <DetailBtn onClick={()=>{
-                  const id = x.id
-                  navigate(`/detail/${id}`)}}>상세보기</DetailBtn>
+                  <DetailBtn
+                    onClick={() => {
+                      const id = x.id;
+                      navigate(`/detail/${id}`);
+                    }}
+                  >
+                    상세보기
+                  </DetailBtn>
                   <div>
                     <h3>{x.title}</h3>
                     <p>{x.body}</p>
                   </div>
                   <div>
-                  <Btn
+                    <Btn
                       className="btn"
                       onClick={() => {
                         let 인덱스 = todoList.findIndex(
                           (element) => element.id === x.id
                         );
-                        console.log(인덱스)
-                        dispatch(deleteList(인덱스));
+                        console.log(인덱스);
+                        dispatch(deleteHandler(인덱스));
                       }}
                     >
                       삭제
@@ -108,7 +116,7 @@ const List = () => {
                           (element) => element.id === x.id
                         );
                         인덱스 = todoList[인덱스].id;
-                        dispatch(ruDone(인덱스));
+                        dispatch(doneHandler(인덱스));
                       }}
                     >
                       {" "}
@@ -119,7 +127,6 @@ const List = () => {
               </Fragment>
             );
           })}
- 
         </ListBox>
       </Container>
     </>
@@ -157,7 +164,6 @@ const Btn = styled.button`
     background-color: #fbcead;
   }
 `;
-const DetailBtn = styled.button`
-`;
+const DetailBtn = styled.button``;
 
 export default List;

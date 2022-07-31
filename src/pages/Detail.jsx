@@ -20,7 +20,7 @@ const Detail = () => {
           <h1>{todoList[idx].title}</h1>
           <h4>{todoList[idx].body}</h4>
         </CardBox>
-
+//todo history 버전도 해보기 
         <Btn onClick={() => navigate(-1)}> 이전으로 </Btn>
       </DetailBox>
     </div>

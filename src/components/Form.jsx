@@ -1,6 +1,6 @@
-import React, { useEffect, useState, useRef, memo } from "react";
+import React, { useEffect, useState, useRef, memo, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addTodo } from "../redux/config/configStore";
+import { addHandler } from "../redux/modules/todo";
 import styled from "styled-components";
 
 const Form = () => {
@@ -11,28 +11,23 @@ const Form = () => {
   let todoList = useSelector((state) => {
     return state.todoList;
   });
+  //todo 유즈메모 버전 시도하기
   //!ref 테스트
   //!usememo테스트
-  const nameRef = useRef("");
-  //const takeInput=()=>{
-  //nameRef.current="안녕"
-  //console.log(nameRef.current)
-  //}
-  //takeInput()
+  const nameRef = useRef();
 
-  ///!여기까지
+  console.log("안녕");
   const onChange = (event) => {
     const { name, value } = event.target;
     if (name === "todoTitle") {
-      // nameRef.current= value;
-      //console.log(nameRef.current)
+      //따옴표 잊지 않기
       setTodoTitle(value);
     } else if (name === "todoBody") {
       setTodoBody(value);
     }
   };
-
-  //? 서브밋이벤트--------------------------------------------
+  // useMemo(()=> onChange(),[todoList])
+  //! 서브밋이벤트--------------------------------------------
   const onSubmit = (e) => {
     //prevent막기
     e.preventDefault();
@@ -46,16 +41,13 @@ const Form = () => {
       body: todoBody,
       isDone: false,
     };
+    console.log(nameRef.current.value);
 
-    dispatch(addTodo(list));
+    dispatch(addHandler(list));
     //인풋값 비워주기
     setTodoTitle("");
     setTodoBody("");
   };
-
-  useEffect(() => {
-    console.log(todoList);
-  }, [todoList]);
 
   //! 리턴-------------------------------------------------
   return (
@@ -64,6 +56,7 @@ const Form = () => {
         <TitleBox>
           <InputLabel>제목</InputLabel>
           <InputBox
+            ref={nameRef}
             value={todoTitle}
             onChange={onChange}
             type="text"
