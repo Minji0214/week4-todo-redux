@@ -12,6 +12,7 @@ const List = () => {
   });
   //todo 필터 두개 안쓰는 방법 
   //todo 컴포넌트 분리 할수 있는 방법 고민 
+
   let test1 = todoList.filter((y) => {
     return y.isDone === false;
   });
@@ -28,6 +29,7 @@ const List = () => {
         <hr />
         <ListBox>
           {test1.map((x, i) => {
+//! if( x.isDone === false){} 하면해결
             return (
               <Fragment key={x.id}>
                 <CardBox>
@@ -39,6 +41,7 @@ const List = () => {
                   >
                     상세보기
                   </DetailBtn>
+                  <div>id : {x.id}</div>
 
                   <div>
                     <h3>{x.title}</h3>
@@ -92,6 +95,7 @@ const List = () => {
                   >
                     상세보기
                   </DetailBtn>
+                  <div>id : {x.id}</div>
                   <div>
                     <h3>{x.title}</h3>
                     <p>{x.body}</p>

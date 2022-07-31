@@ -17,6 +17,7 @@ const Detail = () => {
     <div>
       <DetailBox>
         <CardBox>
+          <div>id : {todoList[idx].id}</div>
           <h1>{todoList[idx].title}</h1>
           <h4>{todoList[idx].body}</h4>
         </CardBox>
