@@ -2,7 +2,7 @@ import React from "react";
 import { Fragment } from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux"; //dispatch 임포트
-import { deleteHandler, doneHandler } from '../redux/modules/todo';
+import { deleteHandler, doneHandler } from "../redux/modules/todo";
 import { useNavigate } from "react-router-dom";
 
 const List = () => {
@@ -10,8 +10,8 @@ const List = () => {
   let todoList = useSelector((state) => {
     return state.todoList;
   });
-  //todo 필터 두개 안쓰는 방법 
-  //todo 컴포넌트 분리 할수 있는 방법 고민 
+  //todo 필터 두개 안쓰는 방법
+  //todo 컴포넌트 분리 할수 있는 방법 고민
 
   let test1 = todoList.filter((y) => {
     return y.isDone === false;
@@ -29,7 +29,7 @@ const List = () => {
         <hr />
         <ListBox>
           {test1.map((x, i) => {
-//! if( x.isDone === false){} 하면해결
+            //! if( x.isDone === false){} 하면해결
             return (
               <Fragment key={x.id}>
                 <CardBox>
@@ -87,15 +87,19 @@ const List = () => {
             return (
               <Fragment key={x.id}>
                 <CardBox>
-                  <DetailBtn
-                    onClick={() => {
-                      const id = x.id;
-                      navigate(`/detail/${id}`);
-                    }}
-                  >
-                    상세보기
-                  </DetailBtn>
-                  <div>id : {x.id}</div>
+                  <div>
+                    {" "}
+                    <DetailBtn
+                      onClick={() => {
+                        const id = x.id;
+                        navigate(`/detail/${id}`);
+                      }}
+                    >
+                      상세보기
+                    </DetailBtn>
+                    <div>id : {x.id}</div>
+                  </div>
+
                   <div>
                     <h3>{x.title}</h3>
                     <p>{x.body}</p>
@@ -138,18 +142,16 @@ const List = () => {
 };
 
 const ListBox = styled.div`
-  display: flex;
   align-items: flex-start;
-
-  margin-left: 15px;
+  display: flex;
 `;
 const Title = styled.h2``;
 const Container = styled.div`
   display: flex;
-  // align-items: flex-start;
-  align-items: stretch;
+  flex-direction: column;
 
-  //margin: auto;
+  align-items: center;
+  margin-left: 15px;
 `;
 const CardBox = styled.div`
   background-color: #c7c7ac;
@@ -168,6 +170,18 @@ const Btn = styled.button`
     background-color: #fbcead;
   }
 `;
-const DetailBtn = styled.button``;
+const DetailBtn = styled.button`
+  all: unset;
+  border-color: #84af9c;
+  border-style: inset;
+  border-radius: 5px;
+  color: #555541;
+  font-size: small;
+  &:hover {
+    background-color: #555541;
+    color: white;
+  }
+`;
+const DetailBox = styled.div``;
 
 export default List;

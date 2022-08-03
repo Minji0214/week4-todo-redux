@@ -7,7 +7,6 @@ import Layout from "../components/List";
 
 const Home = () => {
   return (
-    //todo 레이아웃 정리하기 
     <HomeBox>
       <Header></Header>
       <Form></Form>
@@ -19,7 +18,7 @@ const Home = () => {
 const HomeBox = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 100vw;
 `;
 
 export default Home;

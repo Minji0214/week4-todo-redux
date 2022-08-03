@@ -11,9 +11,9 @@ const Form = () => {
   let todoList = useSelector((state) => {
     return state.todoList;
   });
-  //todo 유즈메모 버전 시도하기
+
   //!ref 테스트
-  //!usememo테스트
+
   const nameRef = useRef();
 
   console.log("안녕");
@@ -26,7 +26,7 @@ const Form = () => {
       setTodoBody(value);
     }
   };
-  // useMemo(()=> onChange(),[todoList])
+
   //! 서브밋이벤트--------------------------------------------
   const onSubmit = (e) => {
     //prevent막기
@@ -87,6 +87,8 @@ const FormBox = styled.form`
   height: 4rem;
   display: flex;
   align-items: center;
+  display: flex;
+  justify-content: center;
 `;
 const InputBox = styled.input`
   border-radius: 5px;
@@ -108,8 +110,32 @@ const AddBtn = styled.button`
   padding: 3px;
   margin: 5px;
   &:hover {
-    background-color: #e7cbba;
-    border-color: #f28080;
+    color: #e7cbba;
+  }
+  ///////*애니메이션 효과를 넣었으나, 실행안됨*/
+  ::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-color: #000;
+    -webkit-transform: scaleY(0.3);
+    transform: scaleY(0.3);
+    opacity: 0;
+    transition: all 0.3s;
+  }
+  &:hover::before {
+    opacity: 1;
+    background-color: #fff;
+    -webkit-transform: scaleY(1);
+    transform: scaleY(1);
+    transition: -webkit-transform 0.6s cubic-bezier(0.08, 0.35, 0.13, 1.02),
+      opacity 0.4s;
+    transition: transform 0.6s cubic-bezier(0.08, 0.35, 0.13, 1.02), opacity;
   }
 `;
 
